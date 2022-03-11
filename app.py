@@ -14,10 +14,10 @@ def home():
 @app.route("/uploadImage", methods=["POST"])
 def upload():
     if request.method == "POST":
-        print(request)
+        # print(request)
         image = request.files["image"]
         filename = secure_filename(image.filename)
-        print(filename)
+        # print(filename)
         image.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
         return jsonify({"message": "Image Uploaded Successfully"})
 
