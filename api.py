@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import os
 
+port = int(os.environ.get('PORT', 5000))
 UPLOAD_FOLDER = os.getcwd() + "/images"
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -22,7 +23,7 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host = '0.0.0.0', port = port, debug=True)
 
 
 # @app.route('/predict', methods=['POST'])
