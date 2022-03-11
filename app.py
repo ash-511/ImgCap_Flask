@@ -17,6 +17,7 @@ def upload():
         # print(request)
         image = request.files["image"]
         filename = secure_filename(image.filename)
+        return jsonify({"message":"hi"})
         # print(filename)
         image.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
         return jsonify({"message": "Image Uploaded Successfully"})
