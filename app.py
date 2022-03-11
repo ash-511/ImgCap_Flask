@@ -13,14 +13,19 @@ def home():
 
 @app.route("/uploadImage", methods=["POST"])
 def upload():
-    if request.method == "POST":
+  file = request.files['image']
+    # Read the image via file.stream
+  img = Image.open(file.stream)
+
+  return jsonify({'msg': 'success', 'size': [img.width, img.height]})
+    # if request.method == "POST":
         # print(request)
-        image = request.files["image"]
-        filename = secure_filename(image.filename)
-        return jsonify({"message":"hi"})
+        # image = request.files["image"]
+        # filename = secure_filename(image.filename)
+        # return jsonify({"message":"hi"})
         # print(filename)
-        image.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        return jsonify({"message": "Image Uploaded Successfully"})
+        # image.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+        # return jsonify({"message": "Image Uploaded Successfully"})
 
 
 if __name__ == "__main__":
