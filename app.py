@@ -17,7 +17,7 @@ def upload():
     # Read the image via file.stream
   img = Image.open(file.stream)
 
-  return jsonify({'msg': 'success', 'size': [img.width, img.height]})
+  return jsonify({'message': 'success', 'size': [img.width, img.height]})
     # if request.method == "POST":
         # print(request)
         # image = request.files["image"]
