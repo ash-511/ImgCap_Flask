@@ -1,8 +1,22 @@
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from PIL import Image
-import pickle
+# import pickle
 import os
+
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.applications.xception import Xception
+from keras.models import load_model
+from pickle import load
+import numpy as np
+# from PIL import Image
+from flask_restful import Resource, Api, reqparse
+
+import tempfile
+import sys
+import glob
+import re
 
 port = int(os.environ.get('PORT', 5000))
 UPLOAD_FOLDER = os.getcwd() + "/images"
