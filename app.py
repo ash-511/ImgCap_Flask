@@ -123,8 +123,8 @@ def upload():
       # 	f.save(file_path)
 
 
-    # img = Image.open(file.stream)
-    photo = extract_features(file, xception_model)
+    img = Image.open(file.stream)
+    photo = extract_features(img, xception_model)
     description = generate_desc(model, tokenizer, photo, max_length)
     result= description[6:-3]
     # if os.path.exists(file_path):
