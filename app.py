@@ -30,11 +30,11 @@ def home():
         # return jsonify({"message": "Image Uploaded Successfully"})
 @app.route('/predict', methods=["GET", "POST"])
 def upload():
-	def extract_features(image, model):
-		# try:
-		# 	image = Image.open(filename)
-		# except:
-		# 	print("ERROR: Couldn't open image! Make sure the image path and extension is correct")
+  def extract_features(image, model):
+    # try:
+    # 	image = Image.open(filename)
+    # except:
+    # 	print("ERROR: Couldn't open image! Make sure the image path and extension is correct")
     image = image.resize((299,299))
     image = np.array(image)
     if image.shape[2] == 4:
@@ -44,15 +44,15 @@ def upload():
     image = image - 1.0
     feature = model.predict(image)
     return feature
-	
-	def word_for_id(integer, tokenizer):
+  
+  def word_for_id(integer, tokenizer):
     for word, index in tokenizer.word_index.items():
       if index == integer:
         return word
     return None
 
 
-	def generate_desc(model, tokenizer, photo, max_length):
+  def generate_desc(model, tokenizer, photo, max_length):
     in_text = 'start'
     for i in range(max_length):
       sequence = tokenizer.texts_to_sequences([in_text])[0]
@@ -66,21 +66,21 @@ def upload():
       if word == 'end':
         break
     return in_text
-	#path = 'Flicker8k_Dataset/111537222_07e56d5a30.jpg'
+  #path = 'Flicker8k_Dataset/111537222_07e56d5a30.jpg'
   
   max_length = 32
   tokenizer = load(open("tokenizer.p","rb"))
   model = load_model('models/model_9.h5')
   xception_model = Xception(include_top=False, pooling="avg")
 
-	# def allowed_image(fname):
-	# 	if not "." in fname:
-	# 		return False
-	# 	ext = fname.rsplit(".", 1)[1]
-	# 	if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
-	# 		return True
-	# 	else:
-	# 		return False
+  # def allowed_image(fname):
+  # 	if not "." in fname:
+  # 		return False
+  # 	ext = fname.rsplit(".", 1)[1]
+  # 	if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+  # 		return True
+  # 	else:
+  # 		return False
 
 
 
@@ -92,20 +92,20 @@ def upload():
         "message": "Image not uploaded successfully"
       })
 
-		  #fname = werkzeug.utils.secure_filename(imagefile.filename)
+      #fname = werkzeug.utils.secure_filename(imagefile.filename)
 
-		# basepath = os.path.dirname(__file__)
-		# file_path = os.path.join(basepath, 'uploads', fname)
-		# f.save(file_path)
+    # basepath = os.path.dirname(__file__)
+    # file_path = os.path.join(basepath, 'uploads', fname)
+    # f.save(file_path)
 
-	   
-	    # f = request.files['file']
-	    # fname=secure_filename(f.filename)
+     
+      # f = request.files['file']
+      # fname=secure_filename(f.filename)
 
-		# if allowed_image(fname):
-	    # 	basepath = os.path.dirname(__file__)
-	    # 	file_path = os.path.join(basepath, 'uploads', fname)
-	    # 	f.save(file_path)
+    # if allowed_image(fname):
+      # 	basepath = os.path.dirname(__file__)
+      # 	file_path = os.path.join(basepath, 'uploads', fname)
+      # 	f.save(file_path)
 
 
     # img = Image.open(file.stream)
@@ -119,10 +119,10 @@ def upload():
     
   # else:
   #   return 'Error occured, Please ensure you\'re using jpeg or jpg file format.' 
-	# return jsonify({
-	# 			"message": "Image uploaded successfully"
-	# 		})
-	# return None
+  # return jsonify({
+  # 			"message": "Image uploaded successfully"
+  # 		})
+  # return None
 
 if __name__ == "__main__":
     app.run(host = '0.0.0.0', port = port, debug=True)
