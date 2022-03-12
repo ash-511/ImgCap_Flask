@@ -17,6 +17,7 @@ import tempfile
 import sys
 import glob
 import re
+import joblib
 
 port = int(os.environ.get('PORT', 5000))
 UPLOAD_FOLDER = os.getcwd() + "/images"
@@ -84,7 +85,8 @@ def upload():
   #path = 'Flicker8k_Dataset/111537222_07e56d5a30.jpg'
   
   max_length = 32
-  tokenizer = load(open("tokenizer.p","rb"))
+  # tokenizer = load(open("tokenizer.p","rb"))
+  tokenizer = joblib.load("tokenizer.p")
   model = load_model('models/model_9.h5')
   xception_model = Xception(include_top=False, pooling="avg")
 
