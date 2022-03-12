@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 from PIL import Image
 import pickle
-from sklearn.externals import joblib
 import os
 
 port = int(os.environ.get('PORT', 5000))
