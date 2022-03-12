@@ -11,13 +11,14 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def home():
   return jsonify({"message": "Hello"})
 
-@app.route("/uploadImage", methods=["POST"])
+@app.route("/uploadImage", methods=["GET", "POST"])
 def upload():
   file = request.files['image']
     # Read the image via file.stream
   img = Image.open(file.stream)
 
   return jsonify({'message': 'success', 'size': [img.width, img.height]})
+
     # if request.method == "POST":
         # print(request)
         # image = request.files["image"]
@@ -29,7 +30,7 @@ def upload():
 
 
 if __name__ == "__main__":
-    app.run(host = '0.0.0.0', port = port, debug=False)
+    app.run(host = '0.0.0.0', port = port, debug=True)
 
 
 # @app.route('/predict', methods=['POST'])
