@@ -46,31 +46,32 @@ def upload():
     return feature
 	
 	def word_for_id(integer, tokenizer):
-		for word, index in tokenizer.word_index.items():
-			if index == integer:
-				return word
-		return None
+    for word, index in tokenizer.word_index.items():
+      if index == integer:
+        return word
+    return None
 
 
 	def generate_desc(model, tokenizer, photo, max_length):
-		in_text = 'start'
-		for i in range(max_length):
-			sequence = tokenizer.texts_to_sequences([in_text])[0]
-			sequence = pad_sequences([sequence], maxlen=max_length)
-			pred = model.predict([photo,sequence], verbose=0)
-			pred = np.argmax(pred)
-			word = word_for_id(pred, tokenizer)
-			if word is None:
-				break
-			in_text += ' ' + word
-			if word == 'end':
-				break
-		return in_text
+    in_text = 'start'
+    for i in range(max_length):
+      sequence = tokenizer.texts_to_sequences([in_text])[0]
+      sequence = pad_sequences([sequence], maxlen=max_length)
+      pred = model.predict([photo,sequence], verbose=0)
+      pred = np.argmax(pred)
+      word = word_for_id(pred, tokenizer)
+      if word is None:
+        break
+      in_text += ' ' + word
+      if word == 'end':
+        break
+    return in_text
 	#path = 'Flicker8k_Dataset/111537222_07e56d5a30.jpg'
-	max_length = 32
-	tokenizer = load(open("tokenizer.p","rb"))
-	model = load_model('models/model_9.h5')
-	xception_model = Xception(include_top=False, pooling="avg")
+  
+  max_length = 32
+  tokenizer = load(open("tokenizer.p","rb"))
+  model = load_model('models/model_9.h5')
+  xception_model = Xception(include_top=False, pooling="avg")
 
 	# def allowed_image(fname):
 	# 	if not "." in fname:
@@ -83,7 +84,7 @@ def upload():
 
 
 
-	if request.method == 'POST':
+  if request.method in ('POST', 'GET'):
     try:
       file = request.files['image']
     except:
